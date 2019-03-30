@@ -1,0 +1,85 @@
+﻿@model HHRR.Models.Datos
+@{
+    ViewBag.Title = "Formulario";
+}
+@using (Html.BeginForm("Formulario", "Home"))
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+  
+        <div class="form-group">
+            @Html.Label("Cedula:")
+            @Html.TextBoxFor(x => x.Cedula)<br />
+            @Html.ValidationMessageFor(x => x.Cedula, "", new { @class = "text-danger" })
+        </div>
+
+    
+        <div class=" form-group ">
+            @Html.Label("Nombre:")
+            @Html.EditorFor(x=> x.Nombre)<br />
+            @Html.ValidationMessageFor(x => x.Nombre, "", new { @class = "text-danger" })
+        </div>
+        
+        <div class="form-group">
+            @Html.Label("Apellido:")
+            @Html.EditorFor(x => x.Apellido)<br />
+            @Html.ValidationMessageFor(x=> x.Apellido, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Edad:")
+            @Html.EditorFor(x => x.Edad)<br />
+            @Html.ValidationMessageFor(x => x.Edad, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Telefono:")
+            @Html.EditorFor(x => x.Telefono)<br />
+            @Html.ValidationMessageFor(x => x.Telefono, "", new { @class = "text-danger" })
+        </div>
+        
+        <div class="form-group ">
+            @Html.Label("Correo:")
+            @Html.EditorFor(x =>x.Correo)<br />
+            @Html.ValidationMessageFor(x => x.Correo, "", new { @class = "text-danger" })
+        </div>
+        
+        <div class="form-group">
+            @Html.Label("Genero:")
+            @Html.DropDownList("Gereno",
+        new SelectList(Enum.GetValues(typeof(Genero))),
+        "Seleccionar Genero",
+        new { @class = "form-control" })
+        </div>
+
+        <div class="form-group" >
+            @Html.Label("Estado Civil:")
+            @Html.Label("Casado") @Html.RadioButton("EstadoCivil", "Casado")
+            @Html.Label("Soltero") @Html.RadioButton("EstadoCivil", "Soltero")
+        </div>
+        <div class="form-group">
+
+            @Html.Label("Hobby:")
+
+           
+                @for (int x = 0;x < Model.Hobby.Count();x++)
+                {
+                    
+                        <label>
+                            @Html.HiddenFor(m => Model.Hobby[x].Hobby)
+                            @Html.HiddenFor(m => Model.Hobby[x].Nombre)
+                            @Html.CheckBoxFor(m => Model.Hobby[x].Id)  @Model.Hobby[x].Nombre
+                        </label>
+                  
+                }
+          
+
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Enviar Formulario" />
+ 
+
+
+
+}
+
+
